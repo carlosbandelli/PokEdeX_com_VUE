@@ -1,7 +1,7 @@
 <template>
     <div id="app">
       <div class="column is-half is-offset-one-quarter is-desktop content is-centered is-vcentered">
-        <div v-for="(poke,index) in pokemons" :key="index" class= "is-centered is-vcentered">
+        <div v-for="(poke,index) in pokemons" :key="index" class= "is-centered is-vcentered" >
           <Pokemon :name="poke.name" :url="poke.url" :num="index+1" />        
         </div>
       </div>

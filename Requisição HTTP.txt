@@ -1,0 +1,73 @@
+Requisiçoes HTTP:
+
+EU vou entrar na PokeApi, só que tem um limite nessa API.
+Como faço para especificar isso na poke api?
+eu tenho que fazer uma requisição 
+
+https://pokeapi.co/api/v2/pokemon?limit=151&offset=0
+
+onde esta escrito limit colocamos 151 e o offset de onde começa nessa 0
+ ela vai do pokemon numero 0 ate 150
+
+para fazer uma requisição http precisamos chamar um metodo
+no Vue
+chamado created
+ele é chamado todo vida que a pagina é carrego no componente
+toda a vez que o compoente é carregado é criado dentro de uma pagina HTML
+esse metodo é chamado pra ele.
+Assim que a pessoa entrar na pagina e o compoente app for carregado por exemplo, o metodd created dele
+vai ser chamado.
+para trabalhar com created, faz o seguinte:
+
+voce coloca created que recebe uma função e ele vai chamr esa função quando for criado
+
+ created: function(){ <-- função criada 
+   axios.get("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0").then(res => { <- lembrando que usou a variavel axios no começo metodo HTTP criado por ele ser um promise ele recebe then
+     console.log("Pegou a lista de pokemons!") <--- funcionando
+     this.pokemons = res.data.results <-- varaivel pokemon que vai receber os dados
+     
+   })
+  }
+--------------------------------------------------------------------------------------
+data(){
+    return {
+      pokemons: [] <-variavel pokemon criar qeu vai recebr um array
+    }
+  },
+--------------------------------------------------------------------------------------------
+componentes para serem utilizados:
+
+components:{
+    Pokemon
+  }  
+------------------------------------------------------------------------------
+
+Código todo do script sendo utilizado:
+
+<script>
+import axios from 'axios'
+import Pokemon from './components/Pokemon'
+export default {
+  name: 'App',
+
+  data(){
+    return {
+      pokemons: []
+    }
+  },
+
+  created: function(){
+   axios.get("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0").then(res => {
+     console.log("Pegou a lista de pokemons!")
+     this.pokemons = res.data.results
+     
+   })
+  },
+  components:{
+    Pokemon
+  }  
+}
+</script>
+
+---------------------------------------------------------------------------------
+
