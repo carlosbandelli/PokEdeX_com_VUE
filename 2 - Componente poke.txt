@@ -1,0 +1,27 @@
+Entrei na pasta compoentes, criei um compoente chamada POKEMON.vue
+Esse componete por padrão vai receber algumas props.
+que vai ser o Name: String
+e outra que vai ser url: String (para fazer as requisiçoes)
+e mais uma que vai ser o Num: Number
+----------------------------------------------------------------
+props: {
+      num: Number,
+      name: String,
+      url: String,
+
+  },
+------------------------------------------------------------------------
+fazer o filtro
+vou pegar o valor vou colcoar em um variavel new name, com eu sei o valor é uma string vou pegar o primeiro
+valor da string. toUpperCase() concateno a primeira letra com o resto do array, para isso precisamos
+usar o metodo slice (metodo de array e string que serve para remover um item que esta em um certo index)no caso que pegar toda string
+e remover apenas o primeiro caracter então eu declaro o valor 1, depois
+e vou simplesmte returnar o novo nome com a letra maiuscula
+----------------------------------------------------------------------------
+upper: function(value){
+            var newName = value[0].toUpperCase() + value.slice(1) <- slice e contatenação e valor 1
+            return newName
+        },
+---------------------------------------------------------------------------
+o que eu fiz receb um texto separei ele em duas partes a primeira letra coloquei maiuscula
+e a segunda parte cortei e unias duas juntos

@@ -5,6 +5,7 @@
           <Pokemon :name="poke.name" :url="poke.url" :num="index+1" />        
         </div>
       </div>
+      
     </div>
 </template>
 
