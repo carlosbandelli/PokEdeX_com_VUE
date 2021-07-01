@@ -1,0 +1,55 @@
+Para exibir mais coisas como o tipo a imagem do pokemon:
+para cada Pokemon que dentro do array de pokemon temos uma url, e quando fazemos uma requisição
+para essa url, ela deve retorna para nos as informações desse pokemon especifico
+e ainda retorna um sprite do pokemon que é uma imagem.
+
+O que vamos fazer:
+Dentro do componente pokemon, nos vamos importar o axios
+
+vamos criar o metodo created que ira retonar uma função e vamos simplesmte fazer uma requisição
+com axios usando metodo GET
+vamos usar a variavel URL dentro da prop , assim todo os pokemons que tem url vão ser usados
+e dentro dessa url eu vou pegar o tipo do pokemon e as imagens dele front e back
+não se esqueça de usar o this.
+Conforme código abaixo:
+-------------------------------------------------------------------------------------
+import axios from 'axios' <- importando axios dentro do compoene Pokemon
+
+export default {
+    created: function(){ <-- metodo created 
+        axios.get(this.url).then(res =>{ <- requisição feita por axios verbo get com a variavel url descrita nas posp
+            this.pokemon.type = res.data.types[0].type.name <- varivavel pokemon type recebe data.types[0]. e typo do nome
+            this.pokemon.front = res.data.sprites.front_default <- imagem front
+            this.pokemon.frontshiny = res.data.sprites.front_shiny
+            this.pokemon.back = res.data.sprites.back_default <- imagem back
+            this.pokemon.backshiny = res.data.sprites.back_shiny
+            this.currentImg = this.pokemon.front
+            this.currentShiny = this.pokemon.front_shiny
+            console.log(this.pokemon)
+        })
+    },
+------------------------------------------------------------------------------------------
+codigo prop:
+
+props: {
+      num: Number,
+      name: String,
+      url: String,
+
+  },
+-----------------------------------------------------------------------------------------
+FEito isso fazemo um metodo Data e dentro dele vamos criar uma varivel chamada pokemon
+que vai receber um objeto e esse objeto vai ter as variaveis que eu fiz acima
+e essas variaveis vão receber vazio
+--------------------------------------------------------------
+data(){
+        return {
+             pokemon:{
+                type:'',
+                front:'',
+                frontshiny:'',
+                back:'',
+                backshiny:''
+            }
+        }
+    },
