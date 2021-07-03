@@ -1,6 +1,5 @@
 <template>
-    <div id="pokemon">
-               
+    <div id="pokemon">                     
         <div class="card">
   <div class="card-image">
     <figure >
@@ -8,8 +7,7 @@
     </figure>
   </div>
   <div class="card-content">
-    <div class="media">
-      
+    <div class="media">      
       <div class="media-content has-text-centered">
         <p class="title is-4">{{num}} - {{upper(name)}} </p>
         <p class="subtitle is-6">{{pokemon.type}}</p>
@@ -48,7 +46,7 @@ export default {
             isFrontshiny: true,
             currentShiny: '',
             pokemon:{
-                type:'',
+                type:'', //Dado, só vai ser reativo se usar dentro do data
                 front:'',
                 frontshiny:'',
                 back:'',
@@ -74,7 +72,7 @@ export default {
                 this.isFront = false
                 this.isFrontshiny = false
                 this.currentImg = this.pokemon.back
-                this.currentShiny = this.pokemon.backshiny
+                this.currentShiny = this.pokemon.back_shiny
             }else{
                 this.isFront = true
                 this.isFrontshiny = true

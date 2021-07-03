@@ -1,0 +1,106 @@
+Para criar um sistema de busca
+eu vou  na minha aplicação principal e adiciono um input do tipo text
+eu faço essa inserção pelo na area de HTML ou sej ao TEMPLATE
+exemplo:
+--------------------------------------------------------------------------------------
+<template>
+    <div id="app">
+      <div class="column is-half is-offset-one-quarter is-desktop content is-centered is-vcentered">
+        <img src="./assets/1.png" >
+        <img src="./assets/3.png" >
+        <hr>
+        <h4 class="is-size-4 has-text-centered">Pokedex</h4>
+        <input type="text" class="input is-rounded" placeholder="Buscar pokemon pelo nome..."> <-------input acrescentado
+        <div v-for="(poke,index) in pokemons" :key="index" class= "is-centered is-vcentered" >
+          <Pokemon :name="poke.name" :url="poke.url" :num="index+1" />        
+        </div>
+      </div>
+      
+    </div>
+</template>
+-----------------------------------------------------------------------------------------------
+
+e logo em seguida vou criar uma variavel no script data chamada de busca, que recebe vazio.
+
+----------------------------------------------------------------------------------
+<script>
+import axios from 'axios'
+import Pokemon from './components/Pokemon'
+export default {
+  name: 'App',
+
+  data(){
+    return {
+      pokemons: [],
+      busca: '' <---- variavel acrescentada para usa-la
+    }
+  },
+-----------------------------------------------------------------------------------
+E vou acrescentar um v-model no input que vai utilizar a variavel que criei no data e adicionei uma class do bulma
+com estilo. (vide documentação Bulma)
+------------------------------------------------------------------------------------------------------
+<template>
+    <div id="app">
+      <div class="column is-half is-offset-one-quarter is-desktop content is-centered is-vcentered">
+        <img src="./assets/1.png" >
+        <img src="./assets/3.png" >
+        <hr>
+        <h4 class="is-size-4 has-text-centered">Pokedex</h4>
+        <input type="text" class="input is-rounded" placeholder="Buscar pokemon pelo nome..." v-model="busca"> <--------v-model acrescentado com class css
+        <div v-for="(poke,index) in pokemons" :key="index" class= "is-centered is-vcentered" >
+          <Pokemon :name="poke.name" :url="poke.url" :num="index+1" />        
+        </div>
+      </div>
+      
+    </div>
+</template>
+
+-------------------------------------------------------------------------------------------
+
+e adiciono um botão abaixo do sistema de busca (esse botão foi pego na documentção do bulma)
+porem o botão esta muito colado na barra de busca então eu vou cria um id para o botão e nele eu faço o
+style para ter um espaço entre ambos.
+
+------------------------------------------------------------------------------------------
+
+<template>
+    <div id="app">
+      <div class="column is-half is-offset-one-quarter is-desktop content is-centered is-vcentered">
+        <img src="./assets/1.png" >
+        <img src="./assets/3.png" >
+        <hr>
+        <h4 class="is-size-4 has-text-centered">Pokedex</h4>
+        <input type="text" class="input is-rounded" placeholder="Buscar pokemon pelo nome..." v-model="busca">
+        <button class="button is-fullwidth is-success" id="buscaBtn">Buscar</button> <--------------------------- id e classe adicionado
+        <div v-for="(poke,index) in pokemons" :key="index" class= "is-centered is-vcentered" >
+          <Pokemon :name="poke.name" :url="poke.url" :num="index+1" />        
+        </div>
+      </div>
+      
+    </div>
+</template>
+
+---------------------------------------------------------------------------------------------------------------------
+
+Style 
+
+<style>
+
+#buscaBtn {      <---- id usado para style
+  margin-top: 2%, <-------------style para ter distancia da barra de busca para o botão
+
+</style>
+---------------------------------------------------------------------------------------------
+
+Como vai funcionar o sistem de busca?
+ele vai passar o nome completo do pokemon ele vai filtar o array de pokemon e vai voltar um array novo
+
+Para fazer isso
+usaremos uma Computed propertie
+
+no script criamos um objeto computed
+
+
+
+
+ 

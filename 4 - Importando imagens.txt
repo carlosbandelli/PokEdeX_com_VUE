@@ -1,0 +1,22 @@
+Importanto imagens
+
+Para utilizar imgs no Vue, vocÊ precisara salvar todas as suas imgs dentro da pasta: ASSETS
+que esta dentro da pasta SRC
+
+Agora para você utilizar uma img dentro de um componente,
+você precisa vir no esu componente
+
+no meu caso eu vou no componenete: App.vue
+e eu vou digitar o seguinte comando:
+<img src="./assets/1.png" >
+onde você tem que colocar o endreço da imagem / o nome da imagina e a extensão dela
+Lembrando se voce colocar <img src="../assets/1.png" > ele volta um diretorio ou pasta
+ esse exemplo se aplica quando voce usa a imagem em outro compoenete sem ser o principal
+portanto ele voltaria um diretorio.
+Exemplo:
+<img src="../assets/1.png" >
+
+Para usar um tamanho de fonte no bulma voce precisa escolher uma classe
+usei o h4 e dentro dele coloquei uma classe. Assim voce defini o tamanho da fonte
+
+<h4 class="is-size-4">Pokedex</h4>
