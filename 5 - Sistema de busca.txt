@@ -95,12 +95,117 @@ Style
 Como vai funcionar o sistem de busca?
 ele vai passar o nome completo do pokemon ele vai filtar o array de pokemon e vai voltar um array novo
 
-Para fazer isso
-usaremos uma Computed propertie
+Vamos precisar tem u outro array de pokemons que vamos chamar filtered pokemon
+Temos que preeencher ele igual preenchemos o primeiro array de pokemons
+------------------------------------------------------------------------------------------------
 
-no script criamos um objeto computed
+data(){
+    return {
+      pokemons: [],
+      filteredPokemons: [], <-- array criado
+      busca: ''
+    }
+  },
+
+  created: function(){
+   axios.get("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0").then(res => {
+     console.log("Pegou a lista de pokemons!")
+     this.pokemons = res.data.results <----- ficar igual assim
+     this.filteredPokemons = res.data.results <--- preenchendo igual
+
+     
+   })
+  },
+
+-----------------------------------------------------------------------------------------------------
+
+Vamos ter que criar um methodo:
+
+Todo vez que esse metodo buscar foi chamado atravez de um evento.
+eu vou sempre reseta alista de pokemons filtrados, e com base nisso
+eu vou disser se a busca que a pessoa pesquisou for vazia
+ele vai resetar tambem.
+E se ele digitou alguma coisa na busca eu vou filtar pelo nome
+
+--------------------------------------------------------------------------------------------------------------
+
+methods:{
+    buscar: function(){
+      this.filteredPokemons = this.pokemons
+      if(this.busca == '' || this.busca == ' '){
+        this.filteredPokemons = this.pokemons
+      }else{
+        this.filteredPokemons = this.pokemons.filter(pokemon => pokemon.name == this.busca)
+      }
+    }
+  }
+---------------------------------------------------------------------------------------------------------------------
+E agora só exibir no vfor o filteredPokemons trocando por pokemons na parte html
+
+-------------------------------------------------------------------------------------------------------------------
+
+<template>
+    <div id="app">
+      <div class="column is-half is-offset-one-quarter is-desktop content is-centered is-vcentered">
+        <img src="./assets/1.png" >
+        <img src="./assets/3.png" >
+        <hr>
+        <h4 class="is-size-4 has-text-centered">Pokedex</h4>
+        <input type="text" class="input is-rounded" placeholder="Buscar pokemon pelo nome..." v-model="busca">
+        <button class="button is-fullwidth is-success" id="buscaBtn"><b>Buscar</b></button>
+        <div v-for="(poke,index) in filteredPokemons" :key="index" class= "is-centered is-vcentered" > <--- troquei pokemons por filteredPokemons
+          <Pokemon :name="poke.name" :url="poke.url" :num="index+1" />        
+        </div>
+      </div>
+      
+    </div>
+</template>
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+E agora eu adiciono um evento no botão que fizemos para chamar o methodo buscar
 
+------------------------------------------------------------------------------------------------------------------------
+
+<template>
+    <div id="app">
+      <div class="column is-half is-offset-one-quarter is-desktop content is-centered is-vcentered">
+        <img src="./assets/1.png" >
+        <img src="./assets/3.png" >
+        <hr>
+        <h4 class="is-size-4 has-text-centered">Pokedex</h4>
+        <input type="text" class="input is-rounded" placeholder="Buscar pokemon pelo nome..." v-model="busca">
+        <button class="button is-fullwidth is-success" id="buscaBtn" @click="buscar"><b>Buscar</b></button> <--------------- evento criado
+        <div v-for="(poke,index) in filteredPokemons" :key="index" class= "is-centered is-vcentered" >
+          <Pokemon :name="poke.name" :url="poke.url" :num="index+1" />        
+        </div>
+      </div>
+      
+    </div>
+</template>
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Feito isso alterar o index do v_for para url
+
+----------------------------------------------------------------------------------------------
+
+<template>
+    <div id="app">
+      <div class="column is-half is-offset-one-quarter is-desktop content is-centered is-vcentered">
+        <img src="./assets/1.png" >
+        <img src="./assets/3.png" >
+        <hr>
+        <h4 class="is-size-4 has-text-centered">Pokedex</h4>
+        <input type="text" class="input is-rounded" placeholder="Buscar pokemon pelo nome..." v-model="busca">
+        <button class="button is-fullwidth is-success" id="buscaBtn" @click="buscar"><b>Buscar</b></button>
+        <div v-for="(poke,index) in filteredPokemons" :key="poke.url" class= "is-centered is-vcentered" > <--- Key alterado
+          <Pokemon :name="poke.name" :url="poke.url" :num="index+1" />        
+        </div>
+      </div>
+      
+    </div>
+</template>
+----------------------------------------------------------------------------------------
 
  

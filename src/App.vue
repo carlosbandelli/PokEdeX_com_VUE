@@ -6,8 +6,8 @@
         <hr>
         <h4 class="is-size-4 has-text-centered">Pokedex</h4>
         <input type="text" class="input is-rounded" placeholder="Buscar pokemon pelo nome..." v-model="busca">
-        <button class="button is-fullwidth is-success" id="buscaBtn"><b>Buscar</b></button>
-        <div v-for="(poke,index) in pokemons" :key="index" class= "is-centered is-vcentered" >
+        <button class="button is-fullwidth is-success" id="buscaBtn" @click="buscar"><b>Buscar</b></button>
+        <div v-for="(poke,index) in filteredPokemons" :key="poke.url" class= "is-centered is-vcentered" >
           <Pokemon :name="poke.name" :url="poke.url" :num="index+1" />        
         </div>
       </div>
@@ -24,6 +24,7 @@ export default {
   data(){
     return {
       pokemons: [],
+      filteredPokemons: [],
       busca: ''
     }
   },
@@ -32,12 +33,24 @@ export default {
    axios.get("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0").then(res => {
      console.log("Pegou a lista de pokemons!")
      this.pokemons = res.data.results
+     this.filteredPokemons = res.data.results
+
      
    })
   },
   components:{
     Pokemon
   },
+  methods:{
+    buscar: function(){
+      this.filteredPokemons = this.pokemons
+      if(this.busca == '' || this.busca == ' '){
+        this.filteredPokemons = this.pokemons
+      }else{
+        this.filteredPokemons = this.pokemons.filter(pokemon => pokemon.name.toLowerCase() == this.busca.toLowerCase())//metodo Utilizado para colocar os nomes em letras minusculas
+      }
+    }
+  }
   // computed: {
   //   resultadoBusca: function() {
   //     if(this.busca == '' || this.busa == ' ')
